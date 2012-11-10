@@ -44,6 +44,7 @@ describe MyDocx do
       @mydocx.set( '@@hello@@', 'HELLOOOO')
       @mydocx.generate
       output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
+      puts output_mydocx.all_text.join
       output_mydocx.all_text.join.should include "HELLOOOO"
     end
   end
@@ -60,5 +61,21 @@ describe MyDocx do
       @mydocx.set('@@hello.checkbox@@', "0")
       @mydocx.all_text.join.should include '☐'
     end
+  end
+
+  describe ".replace_rb" do
+   # it 'replace \n\r to <w:br />' do
+     # @mydocx.set('@@hello.text@@', "こんにちは \n world")
+     # @mydocx.generate
+     # output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
+     # output_mydocx.all_text.join.should include "<w:br />"
+   # end 
+
+   it 'dosnt contain \n when replace \n\r to <w:br />' do
+     @mydocx.set('@@hello.text@@', "こんにちは \n world")
+     @mydocx.generate
+     output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
+     output_mydocx.all_text.join.should_not include "\n"
+   end 
   end
 end
