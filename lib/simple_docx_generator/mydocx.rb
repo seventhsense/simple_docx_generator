@@ -1,4 +1,6 @@
 #encoding: utf-8
+require 'zipruby'
+require 'nokogiri'
 class MyDocx
   VAR_REGEX = Regexp.new('@@[a-zA-Z_][a-zA-Z0-9_.]+?@@')
   def initialize(path_to_template)
