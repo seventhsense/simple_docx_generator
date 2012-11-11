@@ -44,7 +44,6 @@ describe MyDocx do
       @mydocx.set( '@@hello@@', 'HELLOOOO')
       @mydocx.generate
       output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
-      puts output_mydocx.all_text.join
       output_mydocx.all_text.join.should include "HELLOOOO"
     end
   end

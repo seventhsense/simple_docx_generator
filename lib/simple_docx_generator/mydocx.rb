@@ -76,7 +76,6 @@ class MyDocx
     value
   end
 
-
   def replace(key, value)
     index = @keys_index[key]
     unless index == nil
@@ -96,35 +95,38 @@ class MyDocx
     unless index == nil
       index.each do |num|
         index_node = @document_xml.xpath("//w:t")[num].parent
+        index_p_node = index_node.parent
         @document_xml.xpath("//w:t")[num].remove
         frag = Nokogiri::XML::DocumentFragment.new @document_xml
         value.split("\n").each do |t|
           run_node = index_node.dup
+          p_node = index_p_node.dup
           node = Nokogiri::XML::Node.new "t", @document_xml 
           node['prefix'] = "w"
           node.content = t
           run_node << node
-          frag << br_node
-          frag << run_node
+          p_node << run_node
+          frag << p_node
         end
-        index_node.add_next_sibling frag
+        index_p_node.add_next_sibling frag
+        index_p_node.remove
       end
+      set_keys_index
       true
     else
       false
     end
-    set_keys_index
-    value
   end
 
-  def br_node
-    br_node = Nokogiri::XML::Node.new "br", @document_xml
-    br_node['prefix'] = "w"
-    br_node
-  end
-  def _run_node
-    run_node = Nokogiri::XML::Node.new "r", @document_xml
-    run_node['prefix'] = "w"
-    run_node
-  end
+  # def br_node
+    # br_node = Nokogiri::XML::Node.new "br", @document_xml
+    # br_node['prefix'] = "w"
+    # br_node
+  # end
+
+  # def _run_node
+    # run_node = Nokogiri::XML::Node.new "r", @document_xml
+    # run_node['prefix'] = "w"
+    # run_node
+  # end
 end 
