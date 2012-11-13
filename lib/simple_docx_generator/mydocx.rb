@@ -2,8 +2,31 @@
 require 'zipruby'
 require 'nokogiri'
 require 'ydocx'
+
+#= クラス/MyDocx
+#  docxを扱うクラスです
+#  主な機能は次のとおりです
+#  * テンプレートファイルの場所を指定してインスタンス化します
+#  * keysメソッドでテンプレートファイルに含まれる変数(以下、テンプレートファイルで使う変数を単に変数といいます)を取得します
+#  * setメソッドで変数に値を代入することができます
+#  * generateメソッドでdocxファイルを生成します
 class MyDocx
+
+  #== 変数を定義する正規表現
+  #=== 変数の定義
+  # * @@で始まり、@@で終わる
+  # * 半角アルファベットの大文字・小文字またはアンダーバーで始まる
+  # * 2文字目以降は半角アルファベットの大文字・小文字アンダーバーのほかに数字とピリオドを使うことができる
+  # * 最初のピリオドから次のピリオドないし最後の@@までの文字列をプロパティという
+  #   例:: @@hello.text@@
+  #   - .checkboxプロパティ 値をStringの"1"に指定すると☑に置換えます。それ以外の値は☐に置換えます
+  #   - .textプロパティ 改行も含めて再現します
   VAR_REGEX = Regexp.new('@@[a-zA-Z_][a-zA-Z0-9_.]+?@@')
+
+  #== initialize
+  # インスタンスの初期化
+  # Param:: path_to_templateはテンプレートファイルの場所を指定します
+  # テンプレートファイルに半角スペースなどを含んでいると生成されたdocxにエラーが出ます
   def initialize(path_to_template)
     @keys_index = {}
     @filename = File.basename(path_to_template)
@@ -12,6 +35,11 @@ class MyDocx
     set_keys_index
   end
 
+  #== set
+  # 変数に値を代入します
+  # Params:: key, valueともにString valueを指定しない場合は''になります
+  # Return:: setに成功したらtrue、失敗したらfalseが返ります
+  # 典型的にはkeyが存在しない場合を想定しています
   def set(key, value = '')
     value = set_checkbox_value(key, value)
     if key.gsub(/@@/, '').split('.')[1] == 'text'
@@ -21,22 +49,33 @@ class MyDocx
     end
   end
 
+  #== keys
+  # 変数の一覧をArrayで返します
+  # Return:: 変数の一覧をArrayで返します
   def keys
     @keys_index.map do |key, value|
       key
     end
   end
 
+  #== keys_index
+  # 変数と変数が含まれている場所です
+  # Return:: 形式は変数をkey、対応する場所のArray(同じ変数がテンプレートファイル内に複数存在する可能性があります)をvalueとしたハッシュ形式です。デバッグ用。
   def keys_index
     @keys_index
   end
 
+  #== all_text
+  # すべてのテキストをArrayで返します。今のところヘッダー・フッターは未対応です。デバッグ用。
   def all_text
     @document_xml.xpath("//w:t").map do |t_node|
       t_node.content
     end
   end
 
+  #== to_html
+  # ydocxというパーサーを介して<div>タグで囲んだhtmlを返します
+  # オプションで<div>タグのclass名を指定できます
   def to_html(class_name='')
     ydocx = YDocx::Document.open File.join(@dir, @filename)
     html = Nokogiri::HTML ydocx.to_html
@@ -47,6 +86,13 @@ class MyDocx
     myhtml.to_s
   end
 
+  #== generate
+  # @document_xmlを使ってdocxファイルを生成します
+  # docxファイルはテンプレートファイルと同じディレクトリに生成されます
+  # もし同じファイル名のファイルが存在していた場合はそのファイルを上書きします
+  # Param:: filenameにdocx拡張子をつけた名前がファイル名となります
+  # もしfilenameを指定しない場合はoutput_元のファイル名.docxというファイルになります
+  #
   def generate(filename = 'output_' + @filename)
     File.delete(filename) if File.exist?(filename)
     Zip::Archive.open(File.join(@dir, @filename)) do |ar1|

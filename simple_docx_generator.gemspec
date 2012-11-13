@@ -19,6 +19,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency "nokogiri"
   gem.add_runtime_dependency "zipruby"
+  gem.add_runtime_dependency "rubyzip" 
+  gem.add_runtime_dependency "rmagick" 
+  gem.add_runtime_dependency "htmlentities" 
   gem.add_runtime_dependency "ydocx" 
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "simplecov"
