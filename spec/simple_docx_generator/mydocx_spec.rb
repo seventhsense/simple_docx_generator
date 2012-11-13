@@ -70,11 +70,36 @@ describe MyDocx do
      # output_mydocx.all_text.join.should include "<w:br />"
    # end 
 
-   it 'dosnt contain \n when replace \n\r to <w:br />' do
+   it 'doesnt contain \n when replace \n\r to <w:br />' do
      @mydocx.set('@@hello.text@@', "こんにちは \n world")
      @mydocx.generate
      output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
      output_mydocx.all_text.join.should_not include "\n"
    end 
+
+   it 'does with fax cover template without no word error' do
+     @mydocx2 = MyDocx.new('spec/fixtures/Fax_cover_sheet.docx')
+     @mydocx2.set('@@memo.text@@', "拝啓 \n お元気ですか。")
+     @mydocx2.generate
+     output_mydocx2 = MyDocx.new('spec/fixtures/output_Fax_cover_sheet.docx')
+     output_mydocx2.all_text.join.should include "拝啓", "お元気ですか"
+   end
+  end
+
+  # TODO
+  describe ".to_html" do
+    it 'contain @@hello@@ before set' do
+      html = @mydocx.to_html
+      html.should include "@@hello@@"
+    end
+    it 'contain <div>' do
+      html = @mydocx.to_html
+      html.should include "<div>"
+    end
+
+    it 'set class with option' do 
+      html = @mydocx.to_html "myclass"
+      html.should include '<div class="myclass">'
+    end
   end
 end

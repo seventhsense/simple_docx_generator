@@ -1,6 +1,7 @@
 #encoding: utf-8
 require 'zipruby'
 require 'nokogiri'
+require 'ydocx'
 class MyDocx
   VAR_REGEX = Regexp.new('@@[a-zA-Z_][a-zA-Z0-9_.]+?@@')
   def initialize(path_to_template)
@@ -34,6 +35,16 @@ class MyDocx
     @document_xml.xpath("//w:t").map do |t_node|
       t_node.content
     end
+  end
+
+  def to_html(class_name='')
+    ydocx = YDocx::Document.open File.join(@dir, @filename)
+    html = Nokogiri::HTML ydocx.to_html
+    nodes = html.xpath("//body").children
+    myhtml = Nokogiri::HTML::DocumentFragment.parse "<div></div>"
+    myhtml.child['class'] = class_name unless class_name.empty?
+    myhtml.child << nodes
+    myhtml.to_s
   end
 
   def generate(filename = 'output_' + @filename)
@@ -119,14 +130,14 @@ class MyDocx
   end
 
   # def br_node
-    # br_node = Nokogiri::XML::Node.new "br", @document_xml
-    # br_node['prefix'] = "w"
-    # br_node
+  # br_node = Nokogiri::XML::Node.new "br", @document_xml
+  # br_node['prefix'] = "w"
+  # br_node
   # end
 
   # def _run_node
-    # run_node = Nokogiri::XML::Node.new "r", @document_xml
-    # run_node['prefix'] = "w"
-    # run_node
+  # run_node = Nokogiri::XML::Node.new "r", @document_xml
+  # run_node['prefix'] = "w"
+  # run_node
   # end
 end 
