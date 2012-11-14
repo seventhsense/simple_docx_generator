@@ -6,7 +6,7 @@ RubyやRailsからdocxファイルの@@で囲まれた文字列を置換えま�
 
 Add this line to your application's Gemfile:
 
-    gem 'simple_docx_generator'
+    gem 'simple_docx_generator', git: 'git://github.com/seventhsense/simple_docx_generator.git'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install simple_docx_generator
+    $ gem install simple_docx_generator --source git://github.com/seventhsense/simple_docx_generator.git
 
 ## Usage
 
