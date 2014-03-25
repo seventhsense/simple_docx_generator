@@ -17,12 +17,12 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency "nokogiri"
-  gem.add_runtime_dependency "zipruby"
-  gem.add_runtime_dependency "rubyzip" 
-  gem.add_runtime_dependency "rmagick" 
-  gem.add_runtime_dependency "htmlentities" 
-  gem.add_runtime_dependency "ydocx" 
+  gem.add_runtime_dependency "nokogiri", "1.5.5"
+  gem.add_runtime_dependency "zipruby", "0.3.6"
+  gem.add_runtime_dependency "rubyzip" , "0.9.9"
+  gem.add_runtime_dependency "rmagick" , "2.13.1"
+  gem.add_runtime_dependency "htmlentities" , "4.3.1"
+  gem.add_runtime_dependency "ydocx" , "1.2.3"
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-vim"
