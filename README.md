@@ -34,14 +34,19 @@ ex. @@hello@@
     mydocx = MyDocx.new(path_to_docxfile)
 
 ### 変数を確認する
-mydocx.keysでテンプレート内の変数を得ます
+    
+    mydocx.keys
+    
+    テンプレート内の変数を得ます
 
 ### 変数に値をセットする
     
     mydocx.set key, value
 
 ### 新しいdocxファイルを作成する
-mydocx.generate filename
+
+    mydocx.generate filename
+
 テンプレートファイルと同じディレクトリにfilename.docx名前のdocxファイルが生成されます.
 filenameを省略すると、output_元のファイル名となります.
 
