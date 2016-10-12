@@ -1,4 +1,5 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/seventhsense/simple_docx_generator.svg)](https://gemnasium.com/github.com/seventhsense/simple_docx_generator)
+[![Code Climate](https://codeclimate.com/github/seventhsense/simple_docx_generator/badges/gpa.svg)](https://codeclimate.com/github/seventhsense/simple_docx_generator)
 
 
 # SimpleDocxGenerator
