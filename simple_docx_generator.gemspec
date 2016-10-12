@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency "nokogiri", "1.5.5"
+  gem.add_runtime_dependency "nokogiri", "1.6.8"
   gem.add_runtime_dependency "zipruby", "0.3.6"
   gem.add_runtime_dependency "rubyzip" , "0.9.9"
   gem.add_runtime_dependency "rmagick" , "2.16.0"
