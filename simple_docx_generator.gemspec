@@ -18,11 +18,12 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency "nokogiri", "1.6.8.1"
-  gem.add_runtime_dependency "zipruby", "0.3.6"
-  gem.add_runtime_dependency "rubyzip" , "0.9.9"
+  # gem.add_runtime_dependency "zipruby", "0.3.6"
+  # gem.add_runtime_dependency "zip-zip"
+  gem.add_runtime_dependency "rubyzip" , "1.2.0"
   gem.add_runtime_dependency "rmagick" , "2.16.0"
   gem.add_runtime_dependency "htmlentities" , "4.3.4"
-  gem.add_runtime_dependency "ydocx" , "1.2.3"
+  gem.add_runtime_dependency "ydocx" , "1.2.5"
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-vim"
