@@ -40,6 +40,11 @@ describe MyDocx do
   end
 
   describe ".generate" do
+    it 'generate new file with output_' do
+      @mydocx.set( '@@hello@@', 'HELLOOOO')
+      @mydocx.generate
+      expect(File).to exist ("spec/fixtures/output_helloworld.docx")
+    end
     it 'generate collect docx file' do
       @mydocx.set( '@@hello@@', 'HELLOOOO')
       @mydocx.generate
@@ -54,7 +59,9 @@ describe MyDocx do
     end
     it 'set ☑ when checkbox is set as "1"' do
       @mydocx.set('@@hello.checkbox@@', "1")
-      @mydocx.all_text.join.should include '☑'
+      @mydocx.generate
+      output_mydocx = MyDocx.new('spec/fixtures/output_helloworld.docx')
+      output_mydocx.all_text.join.should include '☑'
     end
     it 'set ☐ when checkbox is set as "0"' do
       @mydocx.set('@@hello.checkbox@@', "0")
@@ -86,7 +93,6 @@ describe MyDocx do
    end
   end
 
-  # TODO
   describe ".to_html" do
     it 'contain @@hello@@ before set' do
       html = @mydocx.to_html

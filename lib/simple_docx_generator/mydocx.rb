@@ -1,5 +1,5 @@
 #encoding: utf-8
-require 'zipruby'
+# require 'zipruby'
 require 'nokogiri'
 require 'ydocx'
 
@@ -95,20 +95,37 @@ class MyDocx
   #
   def generate(filename = 'output_' + @filename)
     File.delete(filename) if File.exist?(filename)
-    Zip::Archive.open(File.join(@dir, @filename)) do |ar1|
-      Zip::Archive.open(File.join(@dir,filename), Zip::CREATE) do |ar2|
-        ar2.update(ar1)
-        ar2.replace_buffer('word/document.xml', @document_xml.to_xml)
+    # Zip::File.open(File.join(@dir, @filename)) do |ar1|
+      # Zip::File.open(File.join(@dir,filename), Zip::File::CREATE) do |ar2|
+        # ar2.update(ar1)
+        # ar2.replace_buffer('word/document.xml', @document_xml.to_xml)
+      # end
+    # end
+    buffer = Zip::OutputStream.write_buffer(::StringIO.new('')) do |out|
+      Zip::InputStream.open(File.join(@dir, @filename)) do |input|
+        while (entry = input.get_next_entry)
+          out.put_next_entry(entry.name)
+          if entry.name == 'word/document.xml'
+            out.write @document_xml.to_xml
+          else
+            out.write input.read
+          end
+        end
       end
     end
+    File.open(File.join(@dir, filename), 'wb') {|f| f.write(buffer.string)}
     File.join @dir, filename
   end
 
   private
   def set_document_xml(path_to_template)
-    zip = Zip::Archive.open(path_to_template)
-    document_file = zip.fopen('word/document.xml')
-    @document_xml = Nokogiri::XML document_file.read
+    # zip = Zip::File.open(path_to_template)
+    # document_file = zip.fopen('word/document.xml')
+    # @document_xml = Nokogiri::XML document_file.read
+    Zip::File.open(path_to_template) do |zip_files|
+      document_file = zip_files.find_entry('word/document.xml')
+      @document_xml = Nokogiri::XML document_file.get_input_stream.read
+    end
   end
 
   def set_keys_index
