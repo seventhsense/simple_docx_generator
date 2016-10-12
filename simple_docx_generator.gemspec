@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "htmlentities" , "4.3.4"
   gem.add_runtime_dependency "ydocx" , "1.2.5"
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "rake"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-vim"
   gem.add_development_dependency "codeclimate-test-reporter"
