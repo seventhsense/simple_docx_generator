@@ -31,8 +31,7 @@ describe MyDocx do
     end
 
     it "get true when collectly set key and value" do
-      h = @mydocx.set( '@@hello@@', 'HELLOOOO').should be true
-      p h
+      @mydocx.set( '@@hello@@', 'HELLOOOO').should be true
     end
 
     it "get false when try to set incollect key and value" do
