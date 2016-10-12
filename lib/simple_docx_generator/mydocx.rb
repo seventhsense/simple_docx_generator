@@ -92,15 +92,9 @@ class MyDocx
   # もし同じファイル名のファイルが存在していた場合はそのファイルを上書きします
   # Param:: filenameにdocx拡張子をつけた名前がファイル名となります
   # もしfilenameを指定しない場合はoutput_元のファイル名.docxというファイルになります
-  #
+  # Return: パス付きのfilenameを値として返します
   def generate(filename = 'output_' + @filename)
     File.delete(filename) if File.exist?(filename)
-    # Zip::File.open(File.join(@dir, @filename)) do |ar1|
-      # Zip::File.open(File.join(@dir,filename), Zip::File::CREATE) do |ar2|
-        # ar2.update(ar1)
-        # ar2.replace_buffer('word/document.xml', @document_xml.to_xml)
-      # end
-    # end
     buffer = Zip::OutputStream.write_buffer(::StringIO.new('')) do |out|
       Zip::InputStream.open(File.join(@dir, @filename)) do |input|
         while (entry = input.get_next_entry)
@@ -119,9 +113,6 @@ class MyDocx
 
   private
   def set_document_xml(path_to_template)
-    # zip = Zip::File.open(path_to_template)
-    # document_file = zip.fopen('word/document.xml')
-    # @document_xml = Nokogiri::XML document_file.read
     Zip::File.open(path_to_template) do |zip_files|
       document_file = zip_files.find_entry('word/document.xml')
       @document_xml = Nokogiri::XML document_file.get_input_stream.read
