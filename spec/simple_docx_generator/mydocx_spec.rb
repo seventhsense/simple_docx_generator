@@ -31,11 +31,12 @@ describe MyDocx do
     end
 
     it "get true when collectly set key and value" do
-      @mydocx.set( '@@hello@@', 'HELLOOOO').should be_true
+      h = @mydocx.set( '@@hello@@', 'HELLOOOO').should be true
+      p h
     end
 
     it "get false when try to set incollect key and value" do
-      @mydocx.set( '@@HELLO@@', 'HELLOOOO').should be_false
+      @mydocx.set( '@@HELLO@@', 'HELLOOOO').should be false
     end
   end
 
