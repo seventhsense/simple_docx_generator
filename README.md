@@ -1,3 +1,6 @@
+[![Dependency Status](https://gemnasium.com/badges/github.com/seventhsense/simple_docx_generator.svg)](https://gemnasium.com/github.com/seventhsense/simple_docx_generator)
+
+
 # SimpleDocxGenerator
 
 RubyやRailsからdocxファイルの@@で囲まれた文字列を置換えます.
