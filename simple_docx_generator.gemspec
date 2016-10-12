@@ -18,8 +18,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency "nokogiri", "1.6.8.1"
-  # gem.add_runtime_dependency "zipruby", "0.3.6"
-  # gem.add_runtime_dependency "zip-zip"
   gem.add_runtime_dependency "rubyzip" , "1.2.0"
   gem.add_runtime_dependency "rmagick" , "2.16.0"
   gem.add_runtime_dependency "htmlentities" , "4.3.4"
@@ -27,4 +25,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-vim"
+  gem.add_development_dependency "codeclimate-test-reporter"
 end
