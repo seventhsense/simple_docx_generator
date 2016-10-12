@@ -1,9 +1,10 @@
 require 'simplecov'
 require 'simplecov-vim/formatter'
 require 'codeclimate-test-reporter'
-SimpleCov.start do
-  formatter SimpleCov::Formatter::VimFormatter
-end
-# SimpleCov.start
-CodeClimate::TestReporter.start
 require 'simple_docx_generator'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::VimFormatter,
+  CodeClimate::TestReporter::Formatter
+]
+SimpleCov.start 
+
