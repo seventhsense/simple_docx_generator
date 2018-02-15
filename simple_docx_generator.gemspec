@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency "nokogiri", "1.6.8.1"
-  gem.add_runtime_dependency "rubyzip" , "1.2.0"
+  gem.add_runtime_dependency "rubyzip" , "1.2.1"
   gem.add_runtime_dependency "rmagick" , "2.16.0"
   gem.add_runtime_dependency "htmlentities" , "4.3.4"
   gem.add_runtime_dependency "ydocx" , "1.2.5"
