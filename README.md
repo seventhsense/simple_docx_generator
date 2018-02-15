@@ -61,7 +61,7 @@ filenameを省略すると、output_元のファイル名となります.
 
  [状況に応じてRailsのフォームの種類を変える](http://blog.scimpr.com/2012/11/09/%e7%8a%b6%e6%b3%81%e3%81%ab%e5%bf%9c%e3%81%98%e3%81%a6rails%e3%81%ae%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0%e3%81%ae%e7%a8%ae%e9%a1%9e%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b/)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ztu2OP_p4ec" frameborder="0" allowfullscreen></iframe>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ztu2OP_p4ec/0.jpg)](https://www.youtube.com/watch?v=ztu2OP_p4ec)
 
 ## Contributing
 
