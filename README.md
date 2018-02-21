@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install simple_docx_generator --source git://github.com/seventhsense/simple_docx_generator.git
+    $ gem install simple_docx_generator
 
 ## Usage
 
