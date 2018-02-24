@@ -10,7 +10,8 @@ Gem::Specification.new do |gem|
   gem.email         = ["seventh@scimpr.com"]
   gem.description   = %q{テンプレートdocxに値を代入して新しいdocxファイルを生成します。}
   gem.summary       = %q{テンプレートdocxに値を代入して新しいdocxファイルを生成します。}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/seventhsense/simple_docx_generator"
+  gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -22,9 +23,9 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "rmagick" , "2.16.0"
   gem.add_runtime_dependency "htmlentities" , "4.3.4"
   gem.add_runtime_dependency "ydocx" , "1.2.5"
-  gem.add_development_dependency "rspec"
-  gem.add_development_dependency "rake"
-  gem.add_development_dependency "simplecov"
-  gem.add_development_dependency "simplecov-vim"
-  gem.add_development_dependency "codeclimate-test-reporter"
+  gem.add_development_dependency "rspec", "~> 0"
+  gem.add_development_dependency "rake", "~> 0"
+  gem.add_development_dependency "simplecov", "~> 0"
+  gem.add_development_dependency "simplecov-vim", "~> 0"
+  gem.add_development_dependency "codeclimate-test-reporter", "~> 0"
 end
