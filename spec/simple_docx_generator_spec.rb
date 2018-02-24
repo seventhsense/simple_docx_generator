@@ -108,5 +108,29 @@ describe MyDocx do
       html.should include '<div class="myclass">'
     end
   end
+
+  describe "access @document_xml" do
+    it "can access @document_xml" do
+      document_xml = @mydocx.document_xml
+      document_xml.should include '<w:t>@@hello.text@@ @@hello.text@@ @@hello2.text@@</w:t>'
+      # File.open 'spec/fixtures/old_document_xml.xml', 'w' do |text|
+        # text.puts document_xml
+      # end
+    end
+
+    it "can save new document_xml" do
+      xml = File.read 'spec/fixtures/document_xml.xml'
+      @mydocx.update_xml xml
+      keys = @mydocx.keys
+      old_xml = File.read 'spec/fixtures/old_document_xml.xml'
+      @mydocx.update_xml old_xml
+      keys.should include "@@hello3@@", "@@world4@@"
+    end
+  end
+
+  # describe "keys_index" do
+    # keys_index = @mydocx.keys_index
+    # p keys_index
+  # end
 end
 

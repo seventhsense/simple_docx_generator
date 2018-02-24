@@ -111,6 +111,27 @@ class MyDocx
     File.join @dir, filename
   end
 
+  def document_xml
+    @document_xml.to_xml
+  end
+
+  def update_xml xml_text
+    buffer = Zip::OutputStream.write_buffer(::StringIO.new('')) do |out|
+      Zip::InputStream.open(File.join(@dir, @filename)) do |input|
+        while (entry = input.get_next_entry)
+          out.put_next_entry(entry.name)
+          if entry.name == 'word/document.xml'
+            out.write xml_text
+          else
+            out.write input.read
+          end
+        end
+      end
+    end
+    File.open(File.join(@dir, @filename), 'wb') {|f| f.write(buffer.string)}
+    initialize File.join(@dir, @filename)
+  end
+
   private
   def set_document_xml(path_to_template)
     Zip::File.open(path_to_template) do |zip_files|
