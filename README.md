@@ -58,6 +58,10 @@ ex. @@hello@@
 テンプレートファイルと同じディレクトリにfilename.docxという名前のdocxファイルが生成されます.
 filenameを省略すると、output_元のファイル名となります.
 
+### ドキュメント
+
+[詳細はこちらで](http://www.rubydoc.info/gems/simple_docx_generator)
+
 ### Railsでの活用
 
  [状況に応じてRailsのフォームの種類を変える](http://blog.scimpr.com/2012/11/09/%e7%8a%b6%e6%b3%81%e3%81%ab%e5%bf%9c%e3%81%98%e3%81%a6rails%e3%81%ae%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0%e3%81%ae%e7%a8%ae%e9%a1%9e%e3%82%92%e5%a4%89%e3%81%88%e3%82%8b/)
